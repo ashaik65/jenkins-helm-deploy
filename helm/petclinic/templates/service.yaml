@@ -9,7 +9,7 @@ metadata:
 spec:
   selector:
     app: petclinic-app
-  type: LoadBalancer
+  type: NodePort
   ports:
   - nodePort: 32751
     port: 8080
