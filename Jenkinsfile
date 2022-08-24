@@ -1,14 +1,14 @@
 pipeline {
   agent any
      tools {
-      maven 'Maven 3.3.9'
-      jdk 'jdk8'
+      maven 'MAVEN_HOME'
+      jdk 'JAVA_HOME'     
     }		
     stages {      
         stage('Build maven ') {
             steps { 
               sh 'pwd'      
-              sh "mvn clean package -DskipTests=true"
+              sh 'mvn  clean install package'
             }
         }
         
