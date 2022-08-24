@@ -27,7 +27,8 @@ pipeline {
 	  }
 
       stage('Build on k8 ') {
-            steps {	
+            steps {
+	      withKubeConfig([credentialsId: 'kubeconfig']) {
               sh 'pwd'
               sh 'cp -R helm/* .'
 		      sh 'ls -ltr'
@@ -36,6 +37,7 @@ pipeline {
               			
             }           
         }
+      }
     }	    
 }
 
