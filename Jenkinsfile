@@ -23,7 +23,7 @@ pipeline {
                     def customImage = docker.build("jenkins-demo")
                     customImage.push('latest')
                  }                     
-           }
+    }
         }
 	  }
 
