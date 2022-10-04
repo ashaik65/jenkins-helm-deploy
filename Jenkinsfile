@@ -1,5 +1,8 @@
 pipeline {
   agent any	
+   environment {
+        registry = "017663930438.dkr.ecr.us-east-1.amazonaws.com/jenkins-demo"
+    }
     stages {      
         stage('Build maven ') {
             steps { 
@@ -23,7 +26,7 @@ pipeline {
                     def customImage = docker.build("jenkins-demo")
                     customImage.push('latest')
                  }                     
-    }
+            }
         }
 	  }
 
