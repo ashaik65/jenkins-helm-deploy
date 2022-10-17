@@ -18,9 +18,9 @@ pipeline {
         stage('Build docker image') {
            steps {
                script {         
-                 docker.withRegistry('https://017663930438.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:my.aws.credentials') {
-                 def myImage = docker.Build('jenkins-demo')    
-                 myImage.push('latest')
+                 def customImage = docker.build('ashaik65/petclinic', "./docker")
+                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                 customImage.push('latest')
                  }                     
            }
         }
