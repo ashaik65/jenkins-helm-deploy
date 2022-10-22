@@ -20,7 +20,7 @@ pipeline {
                script {         
                  def customImage = docker.build('ashaik65/petclinic', "./docker")
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                 customImage.push('1')
+                 customImage.push('latest')
                  }                     
            }
         }
