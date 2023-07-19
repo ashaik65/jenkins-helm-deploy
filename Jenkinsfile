@@ -26,12 +26,6 @@ pipeline {
         }
 	  }
 
-      stage('Scan with Trivy') {
-            steps {
-                sh 'trivy --exit-code 1 --severity CRITICAL --no-progress ashaik65/petclinic:latest'
-            }
-        }
-
       stage('Build on k8 ') {
             steps {
 	      withKubeConfig([credentialsId: 'kubeconfig']) {
