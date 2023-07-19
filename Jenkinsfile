@@ -28,7 +28,7 @@ pipeline {
 
       stage('Scan with Trivy') {
             steps {
-                sh 'trivy --exit-code 1 --severity CRITICAL --no-progress ashaik65/petclinic:latest'
+                sh 'trivy --exit-code 1 --severity HIGH --no-progress ashaik65/petclinic:latest'
             }
         }
 
