@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: ashaik65/petclinic
-  tag: latest
+  tag: ${BUILD_NUMBER}
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
