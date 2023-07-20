@@ -1,3 +1,20 @@
+#### Create Cluster using kubeadm script ####
+In this POC we need 1 master and 2 worker machine and jenkins machine separately 
+
+Controlplane
+sudo -i
+bash <(curl -s https://raw.githubusercontent.com/rizwan141/k8s/main/script/cluster-setup/master.sh)
+
+Worker-node
+sudo -i
+bash <(curl -s https://raw.githubusercontent.com/rizwan141/k8s/main/script/cluster-setup/worker.sh)
+
+once done take joined command from Controlplane and paste on worker node
+
+
+
+
+
 ### How to deploy Jenkins with Our custom domain and ssl ###
 
 For install jenkins we need to follow below shell script i am using ubuntu 20.04 this script also work for ubuntu 22.04
