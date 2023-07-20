@@ -22,7 +22,7 @@ once done take joined command from Controlplane and paste on worker node
 For install jenkins we need to follow below shell script i am using ubuntu 20.04 this script also work for ubuntu 22.04
 
 vi jenkins.sh
-```yaml
+
 #! /bin/bash
 
 sudo apt update
