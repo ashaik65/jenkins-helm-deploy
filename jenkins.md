@@ -1,12 +1,14 @@
 #### Create Cluster using kubeadm script ####
 In this POC we need 1 master and 2 worker machine and jenkins machine separately 
-
+```
 Controlplane
 sudo -i
+
 bash <(curl -s https://raw.githubusercontent.com/rizwan141/k8s/main/script/cluster-setup/master.sh)
 
 Worker-node
 sudo -i
+
 bash <(curl -s https://raw.githubusercontent.com/rizwan141/k8s/main/script/cluster-setup/worker.sh)
 
 once done take joined command from Controlplane and paste on worker node
