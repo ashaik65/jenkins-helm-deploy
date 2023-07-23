@@ -18,6 +18,16 @@ pipeline {
           sh 'mvn test'
         }
       }
+      stage('Build docker image'){
+        steps{
+          script {
+            def customImage = docker.build("ashaik65/petclinic:${env.BUILD_NUMBER}", "./docker")
+            docker.withRegistry('https://hub.docker.com', 'dockerhub'){
+            customImage.push()  
+            }
+          }
+        }
+      }
     }  
 }
 
