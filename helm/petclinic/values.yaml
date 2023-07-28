@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository:monishaisha210898/petclinic
+  repository: monishaisha210898/petclinic
   tag: ${BUILD_NUMBER}
   pullPolicy: IfNotPresent
 
