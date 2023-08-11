@@ -18,6 +18,17 @@ pipeline {
         sh 'mvn test'
        }
        }
+       stage ('build and push image') {
+        steps {
+            script {
+                def customImage = docker.build ("paddy6078/petclinic: ${env.BUILD_NUMBER}","./docker")
+                cd{
+                    customImage.push()
+                    
+                }
+            }
+        }
+       }
     
     }
 }
