@@ -8,7 +8,7 @@ pipeline {
           }
        }
        stage('copy artifact') {
-        spets {
+        steps {
             sh 'pwd'
             sh 'cp -r target/*.jar docker'
         }
