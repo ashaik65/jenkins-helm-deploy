@@ -13,10 +13,12 @@ pipeline {
             sh 'cp -r target/*.jar docker'
         }
        }
-       stage('run test')
+       stage('run test') {
        steps {
         sh 'mvn test'
        }
+       }
+    
     }
 }
 
