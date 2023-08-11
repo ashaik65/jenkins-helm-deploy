@@ -21,8 +21,8 @@ pipeline {
        stage ('build and push image') {
         steps {
             script {
-                def customImage = docker.build ("paddy6078/petclinic: ${env.BUILD_NUMBER}","./docker")
-                docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
+                def customImage = docker.build("paddy6078/petclinic:${env.BUILD_NUMBER}", "./docker")
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub'){
                     customImage.push()
 
                 }
