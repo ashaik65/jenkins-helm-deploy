@@ -155,6 +155,5 @@ chmod 700 get_helm.sh
 
 
 
-![download](https://github.com/ashaik65/jenkins-helm-deploy/assets/34375439/8dfbe576-5489-455a-9d01-2be9df5c1ce1)
 
 
