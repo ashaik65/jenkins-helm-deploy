@@ -190,6 +190,19 @@ $ scp -i cicd.pem ubuntu@23.20.188.108:/home/ubuntu/config .
 and check the file in local
 
 
+### How to Set Up the Jenkins + GitHub Integration ###
+
+Configuring GitHub
+Step 1: go to your GitHub repository and click on ‘Settings’.
+Step 2: Click on Webhooks and then click on ‘Add webhook’.
+Step 3: In the ‘Payload URL’ field, paste your Jenkins environment URL. At the end of this URL add /github-webhook/. In the ‘Content type’ select: ‘application/json’ and leave the ‘Secret’ field empty.
+Ex:-http://54.211.236.223:8080/github-webhook/
+https://jenkins.xyz.com//github-webhook/
+
+Step 4: In the page ‘Which events would you like to trigger this webhook?’ choose ‘Let me select individual events.’ Then, check ‘Pull Requests’ and ‘Pushes’. At the end of this option, make sure that the ‘Active’ option is checked and click on ‘Add webhook’.
+
+Now try to do modifications in code and push it to github and see pipeline is trigger automatically or not
+
 
 
 
