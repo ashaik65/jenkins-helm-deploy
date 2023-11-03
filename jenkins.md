@@ -153,6 +153,48 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 
+#### Jenkins Plugins and creds configuration ###
+In Jenkins we need to install this 2 plugins
+1.docker :- all respective docker plugins
+2. kubernetes:- all respective kubernetes plugins
+
+Creds which we need to configure in jenkins
+1. docker :- use dockerhub username and password as API token
+2. Kubernetes:- need kubeconfig file from master node steps to take config file from master node
+
+Note:- config file is in root so we need to copy from root to /home/ubuntu and also change permission
+
+root@controlplane:~/.kube# ls
+cache  config
+root@controlplane:~/.kube# cp config /home/ubuntu/
+
+ubuntu@controlplane:~$ ls -ltrh config
+-rw------- 1 root root 5.6K Nov  3 13:09 config
+
+as checking here permission is with root need to change with ubuntu user because we need to scp this file from server to local
+
+ubuntu@controlplane:~$ sudo chown ubuntu:ubuntu config
+ubuntu@controlplane:~$ ls -ltrh config
+-rw------- 1 ubuntu ubuntu 5.6K Nov  3 13:09 config
+
+exit from the server
+ubuntu@controlplane:~$ exit
+logout
+Connection to 23.20.188.108 closed.
+
+now fire this command
+
+Anis@MINGW64 ~/Downloads
+$ scp -i cicd.pem ubuntu@23.20.188.108:/home/ubuntu/config .
+
+and check the file in local
+
+
+
+
+
+
+
 
 
 
