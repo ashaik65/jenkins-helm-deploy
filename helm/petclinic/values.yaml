@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: ashaik65/petclinic
+  repository: xilinx19/petclinic
   tag: ${BUILD_NUMBER}
   pullPolicy: IfNotPresent
 
