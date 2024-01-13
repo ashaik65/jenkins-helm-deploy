@@ -9,13 +9,13 @@ pipeline {
                 }
             
             }
-            stage {
+            stage ('copy artifacts') {
                 steps{
                     sh 'pwd'
                     sh 'cp -r  target/*.jar docker'
                 }
             }
-            stage {
+            stage ("test") {
                 steps {
                     sh 'mvn test'
                 }
