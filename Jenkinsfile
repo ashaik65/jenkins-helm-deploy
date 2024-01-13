@@ -20,12 +20,12 @@ pipeline {
                     sh 'mvn test'
                 }
             }
-            stage ("docker") {
-                steps {
+            stage('Build Docker Image'){
+                steps{
                     script {
-                        def customImage = docker.build("xilinx19/pet:${env.BUILD_NUMBER}", "./docker" )
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
-                        customImage.push()
+                        def customImage = docker.build("xilinx19/petclinic:${env.BUILD_NUMBER}", "./docker")
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        customImage.push() 
 
                     }
                 }
