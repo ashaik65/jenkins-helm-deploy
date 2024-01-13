@@ -20,7 +20,7 @@ pipeline {
                     sh 'mvn test'
                 }
             }
-            stage{
+            stage ("docker") {
                 steps {
                     script {
                         def customImage = docker.build("xilinx19/pet:${env.BUILD_NUMBER}", "./docker" )
