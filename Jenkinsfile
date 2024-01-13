@@ -38,7 +38,7 @@ pipeline {
                  sh 'cp -R helm/* .'
                  sh 'ls -lrth'
                  sh 'pwd'
-                 sh '/usr/local/bin/helm upgrade --install petclinic-app petclinic --set image.repository=xilinx19/pet --set image.tag=${BUILD_NUMBER}'
+                 sh '/usr/local/bin/helm upgrade --install petclinic-app petclinic --set image.repository=xilinx19/petclinic --set image.tag=${BUILD_NUMBER}'
             }
         }
     }
