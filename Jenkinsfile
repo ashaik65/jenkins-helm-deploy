@@ -9,5 +9,16 @@ pipeline {
                 }
             
             }
+            stage {
+                steps{
+                    sh 'pwd'
+                    sh 'cp -r  target/*.jar docker'
+                }
+            }
+            stage {
+                steps {
+                    sh 'mvn test'
+                }
+            }
         }
     }
