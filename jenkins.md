@@ -4,12 +4,12 @@ In this POC we need 1 master and 2 worker machine and jenkins machine separately
 Controlplane
 sudo -i
 
-bash <(curl -s https://raw.githubusercontent.com/rizwan141/k8s/main/script/cluster-setup/master.sh)
+bash <(curl -s https://raw.githubusercontent.com/killer-sh/cks-course-environment/master/cluster-setup/latest/install_master.sh)
 
 Worker-node
 sudo -i
 
-bash <(curl -s https://raw.githubusercontent.com/rizwan141/k8s/main/script/cluster-setup/worker.sh)
+bash <(curl -s https://raw.githubusercontent.com/killer-sh/cks-course-environment/master/cluster-setup/latest/install_worker.sh)
 
 once done take joined command from Controlplane and paste on worker node
 
@@ -152,6 +152,60 @@ sudo chown jenkins:docker /var/run/docker.sock ----need to provide owenership  f
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
+
+#### Jenkins Plugins and creds configuration ###
+In Jenkins we need to install this 2 plugins
+1.docker :- all respective docker plugins
+2. kubernetes:- all respective kubernetes plugins
+
+Creds which we need to configure in jenkins
+1. docker :- use dockerhub username and password as API token
+2. Kubernetes:- need kubeconfig file from master node steps to take config file from master node
+
+Note:- config file is in root so we need to copy from root to /home/ubuntu and also change permission
+
+root@controlplane:~/.kube# ls
+cache  config
+root@controlplane:~/.kube# cp config /home/ubuntu/
+
+ubuntu@controlplane:~$ ls -ltrh config
+-rw------- 1 root root 5.6K Nov  3 13:09 config
+
+as checking here permission is with root need to change with ubuntu user because we need to scp this file from server to local
+
+ubuntu@controlplane:~$ sudo chown ubuntu:ubuntu config
+ubuntu@controlplane:~$ ls -ltrh config
+-rw------- 1 ubuntu ubuntu 5.6K Nov  3 13:09 config
+
+exit from the server
+ubuntu@controlplane:~$ exit
+logout
+Connection to 23.20.188.108 closed.
+
+now fire this command
+
+Anis@MINGW64 ~/Downloads
+$ scp -i cicd.pem ubuntu@23.20.188.108:/home/ubuntu/config .
+
+and check the file in local
+
+
+### How to Set Up the Jenkins + GitHub Integration ###
+
+Configuring GitHub
+Step 1: go to your GitHub repository and click on ‘Settings’.
+Step 2: Click on Webhooks and then click on ‘Add webhook’.
+Step 3: In the ‘Payload URL’ field, paste your Jenkins environment URL. At the end of this URL add /github-webhook/. In the ‘Content type’ select: ‘application/json’ and leave the ‘Secret’ field empty.
+Ex:-http://54.211.236.223:8080/github-webhook/
+https://jenkins.xyz.com//github-webhook/
+
+Step 4: In the page ‘Which events would you like to trigger this webhook?’ choose ‘Let me select individual events.’ Then, check ‘Pull Requests’ and ‘Pushes’. At the end of this option, make sure that the ‘Active’ option is checked and click on ‘Add webhook’.
+
+Now try to do modifications in code and push it to github and see pipeline is trigger automatically or not
+
+
+
+
 
 
 
