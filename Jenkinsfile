@@ -36,7 +36,6 @@ pipeline {
             sh 'cp -R helm/* .'
             sh 'ls -ltrh'
             sh 'pwd'
-            docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
             sh '/usr/local/bin/helm upgrade --install petclinic-app petclinic --set image.repository=girijeshrichdocker02/petclinic --set image.tag=$(BUILD_NUMBER)'
           }
         }
