@@ -31,7 +31,7 @@ pipeline {
    
       stage('Build on Kubernetes'){
           steps {
-              withKubeConfig([credentialsID: 'kubeconfig']){
+              withKubeConfig([credentialsId: 'kubeconfig']){
                   sh 'pwd'
                   sh 'cp -R helm/* .'
                   sh 'ls -ltrh'
