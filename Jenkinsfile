@@ -1,47 +1,39 @@
-pipeline {
+pipeline{
     agent any
     stages {
-        stage('Build Maven') {
+        stage ('build Maven'){
             steps {
                 sh 'pwd'
                 sh 'mvn clean install package'
             }
         }
-        stage ('Copy Artifacts') {
+        stage ('copy Artifacts')
             steps {
                 sh 'pwd'
                 sh 'cp -r target/*.jar docker'
             }
         }
-        stage('Unit Tests') {
+        stage (Build Docker Image){
             steps {
-                sh 'mvn test'
-            }
-        }    
-        stage('Build Docker Image'){
-            steps{
                 script {
-                    def customImage = docker.build("iran141/petclinic:${env.BUILD_NUMBER}", "./docker")
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                    customImage.push()    
+                    def customImage = docker.build("iran141/petclinic:${env.BUILD_NUMBER}", ./docker)
+                    docker.withRegistry('https://registry.hub.docker.com', 'credentials-dockerhub') {
+                    customImage.push
+
                 }
             }
+
         }
     }
-    stage('Build on kubernetes'){
+    stage (Build on kubernetes){
         steps {
-            withKubeConfig([credentialsId: 'kubeconfig']) {
+            withKubeConfig([credentialsId: 'kubeconfig']){
                 sh 'pwd'
-                sh 'cp -R helm/* .'
+                sh 'cp -r helm/* .'
                 sh 'ls -ltrh'
                 sh 'pwd'
-                sh '/usr/local/bin/helm upgrade --install petclinic-app petclinic --set image.repository=iran141/petclinic --set image.tag=${BUILD_NUMBER}'
+                sh '/usr/local/bin/hemlupgrade --install petclinic-app --set image.tag=$(BUILD_NUMBER)'
+                
+            }
         }
     }
-}
-
-}
-}
-
-
-
